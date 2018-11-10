@@ -1,0 +1,44 @@
+---
+title: "Assignment"
+author: "Aruna"
+date: "10 November 2018"
+output:
+  word_document: default
+  html_document: default
+---
+```{r}
+# How many vowels are there in the names of USA States?
+state = rownames(USArrests)
+grep("[a]|[e]|[i]|[o]|[u]",state, value=TRUE)
+```
+```{r}
+# count number of vowels in each of the state
+#install.packages("stringr")
+library(stringr)
+# vector of vowels
+vowels = c("a", "e", "i", "o", "u")
+# vector for storing results
+num_vowels = vector(mode = "integer", length = 5)
+# calculate number of vowels in each name
+for (j in seq_along(vowels)) {
+  
+  num_aux = str_count(tolower(state), vowels[j])
+  num_vowels[j] = sum(num_aux) }
+# add vowel names
+names(num_vowels) = vowels
+# total number of vowels
+num_vowels
+```
+```{r}
+# 2. Visualize the Vowel Distribution
+barplot(num_vowels,xlab="Vowels",
+     ylab="Number of Occurance",
+     main = "Number of Vowels in USA States ",col = "cyan"
+     )
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
